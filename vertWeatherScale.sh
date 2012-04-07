@@ -48,7 +48,7 @@ fi
 
 COLD='\033[0;36m';
 WARM='\033[0;33m';
-HOT='\033[0;33m';
+HOT='\033[0;31m';
 OUTSIDE='\033[0;37m';
 
 WEATHER=`curl -s http://xml.weather.yahoo.com/forecastrss?p=$ZIP`;
