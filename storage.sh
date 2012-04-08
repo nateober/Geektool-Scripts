@@ -9,7 +9,7 @@ YELLOW='\033[0;33m';
 WHITE='\033[0;37m';
 
 LINES=40;
-HIGHLIGHT=$RED;
+HIGHLIGHT=RED;
 
 usage()
 {
@@ -21,7 +21,7 @@ I wrote this for use with Geektool. It is best operated in Geektool by using the
 
 OPTIONS:
    -h      Highlight color. The color of the pipe line that indicates percent full. 
-		   Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE.
+		   Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE. Default is RED.
 		   
    -l      Total number of pipe lines. Default is 40.
    
