@@ -46,11 +46,6 @@ if [ $ZIP -eq 0 ]; then
     exit
 fi
 
-COLD='\033[0;36m';
-WARM='\033[0;33m';
-HOT='\033[0;31m';
-OUTSIDE='\033[0;37m';
-
 WEATHER=`curl -s http://xml.weather.yahoo.com/forecastrss?p=$ZIP`;
 CURRTEMP=`echo $WEATHER | grep -o "yweather:condition .*temp=\"[0-9]*\"" | grep -o "temp=\"[0-9]*\"" | sed -e 's/temp=\"//' -e 's/\"$//'`;
 HIGH=`echo $WEATHER | grep -o "yweather:forecast .*high=\"[0-9]*\"" | grep -o -m 1 "high=\"[0-9]*\"" | head -1 | sed -e 's/high=\"//' -e 's/\"$//'`;
@@ -62,6 +57,13 @@ let BOTTOM=$LOW-$[$TOTAL-$SPREAD]+$[$HIGH-$LOW];
 
 
 
+# Set Temperature and Range Colors
+# Blue, Yellow, Red for Temperatures
+# White for High and Low (unless the current temperature is high or low)
+COLD='\033[0;36m';
+WARM='\033[0;33m';
+HOT='\033[0;31m';
+OUTSIDE='\033[0;37m';
 
 if [ $CURRTEMP -lt 50 ]; then
 	TEMP=$COLD;
@@ -73,34 +75,33 @@ fi
 
 if [ $CURRTEMP -gt $TOP ]; then
 	let DIFF=$CURRTEMP-$TOP;
-	let START=$CURRTEMP;
+	let CURSOR=$CURRTEMP;
 	let END=$BOTTOM+$DIFF;
 elif [ $CURRTEMP -lt $BOTTOM ]; then
 	let DIFF=$BOTTOM-$CURRTEMP;
-	let START=$TOP-$DIFF;
+	let CURSOR=$TOP-$DIFF;
 	let END=$CURRTEMP;
 else
-	START=$TOP;
+	CURSOR=$TOP;
 	END=$BOTTOM
 fi
 
-let SCALE=$END+1;
-
 echo "-----"
-while [ $START -ge $SCALE ]; do
-	if [ $START -eq $CURRTEMP ] && ([ $START -eq $HIGH ] || [ $START -eq $LOW ]); then
-		echo "$(echo $TEMP)-$START""˙$(echo  '\033[0m')";
-	elif [ $START -eq $CURRTEMP ]; then
-		echo " $(echo $TEMP)$START""˙$(echo  '\033[0m')";
-	elif [ $START -eq $HIGH ]; then
+while [ $CURSOR -ge $END ]; do
+	if [ $CURSOR -eq $CURRTEMP ] && ([ $CURSOR -eq $HIGH ] || [ $CURSOR -eq $LOW ]); then
+		echo "$(echo $TEMP)-$CURSOR""˙$(echo  '\033[0m')";
+	elif [ $CURSOR -eq $CURRTEMP ]; then
+		echo " $(echo $TEMP)$CURSOR""˙$(echo  '\033[0m')";
+	elif [ $CURSOR -eq $HIGH ]; then
 		echo "$(echo $OUTSIDE)-""$HIGH""-$(echo  '\033[0m')";
-	elif [ $START -eq $LOW ]; then
+	elif [ $CURSOR -eq $LOW ]; then
 		echo "$(echo $OUTSIDE)-""$LOW""-$(echo  '\033[0m')";
 	else
-		echo " $START";
+		echo " $CURSOR";
 	fi
-	echo " -";
-	let START=$START-1;
+	if [ $CURSOR -ne $END ]; then
+		echo " -";
+	fi
+	let CURSOR=$CURSOR-1;
 done
-echo " $END"
 echo "-----"
