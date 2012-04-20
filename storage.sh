@@ -10,6 +10,7 @@ WHITE='\033[0;37m';
 
 LINES=40;
 HIGHLIGHT=RED;
+SYMBOL="|";
 
 usage()
 {
@@ -25,10 +26,12 @@ OPTIONS:
 		   
    -l      Total number of pipe lines. Default is 40.
    
+   -s      The string to use as a divisor symbol. The default is a "|". (As you might expect, you must surround the string in quotes)
+   
 EOF
 }
 
-while getopts “:h:l:” OPTION
+while getopts “:h:l:s:” OPTION
 do
      case $OPTION in
          h)
@@ -36,6 +39,9 @@ do
              ;;
          l)
              LINES="$OPTARG"
+             ;;
+    	 s)
+             SYMBOL=$(printf '%s' $OPTARG)
              ;;
     	 ?)
              usage
@@ -86,9 +92,9 @@ DIVTOT=`df -h / | awk '{print $5}' | tail -1 | awk -v lines="$LINES" '{ printf "
 echo "hd \c"
 for ((i=1;i<$LINES;i++));do 
 	if [ $i -eq $DIVTOT ]; then
-		echo "$(echo $HIGHLIGHT)|$(echo  '\033[0m') \c"; 
+		echo "$(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m') \c"; 
 	else 
-		echo "| \c";
+		echo "$SYMBOL \c";
 	fi
 done
 echo "$(df -h / | tail -1 | awk '{printf "%s",$5}')";
