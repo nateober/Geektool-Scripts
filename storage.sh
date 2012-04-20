@@ -1,4 +1,6 @@
 #!/bin/sh
+# Created By Nate Ober
+# Nate [dot] Ober [at] Gmail
 
 LBLUE='\033[0;36m';
 DBLUE='\033[0;34m';

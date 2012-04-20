@@ -1,4 +1,7 @@
 #!/bin/sh
+# Created By Nate Ober
+# Nate [dot] Ober [at] Gmail
+
 TOTAL=35;
 ZIP=0;
 

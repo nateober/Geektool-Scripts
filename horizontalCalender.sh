@@ -1,4 +1,7 @@
 #!/bin/sh
+# Created By Nate Ober
+# Nate [dot] Ober [at] Gmail
+
 echo `cal` | sed -e 's/[A-Z][a-z] //g' \
 -e 's/[0-9]\{4\}/ /g' \
 -e 's/[ ]\{2\}//g' \
