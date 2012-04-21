@@ -88,8 +88,10 @@ case $HIGHLIGHT in
 		exit
 		;;
 esac
-
-DIVTOT=`top -l 2 | grep -o '[0-9\.]\{3,5\}% idle' | awk -v lines=$LINES 'NR==2{printf "%.0f", ($1/100)*lines}'`
+CPUIDLE=`top -l 2 | grep -o '[0-9\.]\{3,5\}% idle' | awk 'NR==2{print}'`;
+CPUUSAGE=`echo $CPUIDLE | awk '{printf "%.0f", 100 - $1}'`;
+DIVTOT=`echo $CPUIDLE | awk -v lines=$LINES '{printf "%.0f", ($1/100)*lines}'`
+echo "$CPUUSAGE%";
 for ((i=1;i<$LINES;i++));do 
 	if [ $i -ge $DIVTOT ]; then
 		echo "$(echo $HIGHLIGHT) $SYMBOL$(echo  '\033[0m')"; 
