@@ -90,10 +90,10 @@ case $HIGHLIGHT in
 esac
 
 
-DIVTOT=`df -h / | awk -v lines="$lines" 'NR==2{printf "%.0f\n", ($5/100)*lines}'`
+DIVTOT=`df -h / | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", ($5/100)*lines}'`
 echo "hd \c"
 for ((i=1;i<$LINES;i++));do 
-	if [ $i -eq $DIVTOT ]; then
+	if [ $i -le $DIVTOT ]; then
 		echo "$(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m') \c"; 
 	else 
 		echo "$SYMBOL \c";
