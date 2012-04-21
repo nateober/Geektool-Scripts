@@ -12,23 +12,23 @@ WHITE='\033[0;37m';
 
 LINES=40;
 HIGHLIGHT=RED;
-SYMBOL="|";
+SYMBOL="__";
 
 usage()
 {
 cat << EOF
 usage: $0 options
 
-This script will output a series of pipe lines with the line that represents the percent full highlighted in one of several colors. 
+This script will output a series of divisor symbols with the line that represents the percent full highlighted in one of several colors. 
 I wrote this for use with Geektool. It is best operated in Geektool by using the "dot" convention ". /path/to/script.sh".
 
 OPTIONS:
    -h      Highlight color. The color of the pipe line that indicates percent full. 
 		   Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE. Default is RED.
 		   
-   -l      Total number of pipe lines. Default is 40.
+   -l      Total number of divisor symbols. Default is 40.
    
-   -s      The string to use as a divisor symbol. The default is a "|". (As you might expect, you must surround the string in quotes)
+   -s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
    
 EOF
 }
@@ -90,13 +90,13 @@ case $HIGHLIGHT in
 esac
 
 
-DIVTOT=`df -h / | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", ($5/100)*lines}'`
-echo "hd \c"
+DIVTOT=`df -h / | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", lines-(($5/100)*lines)}'`
+echo "$(df -h / | awk 'NR==2{printf "%s",$5}')";
 for ((i=1;i<$LINES;i++));do 
-	if [ $i -le $DIVTOT ]; then
-		echo "$(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m') \c"; 
+	if [ $i -ge $DIVTOT ]; then
+		echo " $(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m')"; 
 	else 
-		echo "$SYMBOL \c";
+		echo " $SYMBOL";
 	fi
 done
-echo "$(df -h / | awk 'NR==2{printf "%s",$5}')";
+echo " hd"
