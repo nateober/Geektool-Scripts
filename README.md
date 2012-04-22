@@ -84,7 +84,7 @@ Below are a number of miscellaneous scripts that I use but haven't spent a lot o
 Generates text that gives you the kbps of your connection. It uses route to find your current interface and then netstat, grep and awk to format and print the text.
 
 	This script is best run in GeekTool with the following command and arguments:
-	". /path/to/networkInfo.sh"
+	". /path/to/networkThroughput.sh"
 
 ####[networkInfo.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkInfo.sh)
 Generates text that gives you the internal, external and mac address for your default interface. It uses route to find your current interface and then ifconfig and awk to format and print the text.
