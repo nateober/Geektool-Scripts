@@ -10,7 +10,7 @@ You can get GeekTool for your Mac from the [App Store](http://itunes.apple.com/u
 ### Resource graphs
 The below flies are graphs that monitor your CPU, Memory and Storage utilization.
 
-#### cpuScale.sh 
+#### [cpuScale.sh] https://github.com/nateober/Geektool-Scripts/blob/master/cpuScale.sh 
 Generates a stacked graph for CPU usage using mostly top and awk.
 Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; and character to use for each line. 
 	
@@ -24,7 +24,7 @@ Options include setting a console color for highlighting utilization bars; numbe
 	
 	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
 
-#### memScale.sh
+#### [memScale.sh] (https://github.com/nateober/Geektool-Scripts/blob/master/memScale.sh)
 Generates a stacked graph for Memory usage using mostly top and awk.
 Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; and character to use for each line. 
 	
@@ -38,7 +38,7 @@ Options include setting a console color for highlighting utilization bars; numbe
 	
 	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
 
-#### storage.sh
+#### [storage.sh](https://github.com/nateober/Geektool-Scripts/blob/master/storage.sh)
 Generates a stacked graph for Hard Drive usage using mostly df and awk.
 Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; and character to use for each line. 
 	
@@ -55,19 +55,19 @@ Options include setting a console color for highlighting utilization bars; numbe
 ### Other Console Color Scripts
 Below is a local temperature (as in weather) script and yet another calendar script. Brought to you in console color.
 
-#### vertWeatherScale.sh
+#### [vertWeatherScale.sh](https://github.com/nateober/Geektool-Scripts/blob/master/vertWeatherScale.sh)
 Generates a vertical number line with the high and low for the day and current temperature highlighted.
 Options include the size of the number line and the zipcode (required). All information is acquired through the Yahoo weather api. (http://xml.weather.yahoo.com/forecastrss).
 Temperature is in degrees Fahrenheit.
 
 	This script is best run in GeekTool with the following command and arguments:
-	". /path/to/storage.sh [zn][arguments]"
+	". /path/to/vertWeatherScale.sh [zn][arguments]"
 	-z      Zipcode. Required.
 	-n      Total numbers output. Default is 35.
 
-#### horizontalCalender.sh
+#### [horizontalCalender.sh](https://github.com/nateober/Geektool-Scripts/blob/master/horizontalCalender.sh)
 Generates a horizontal calendar of sorts. Although it tells you the month, date and day of the week, it is mostly for looks.
 
 	This script is best run in GeekTool with the following command and arguments:
-	". /path/to/storage.sh"
+	". /path/to/horizontalCalender.sh"
 	
