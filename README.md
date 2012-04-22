@@ -10,7 +10,7 @@ You can get GeekTool for your Mac from the [App Store](http://itunes.apple.com/u
 ### Resource graphs
 The below flies are graphs that monitor your CPU, Memory and Storage utilization.
 
-#### [cpuScale.sh] https://github.com/nateober/Geektool-Scripts/blob/master/cpuScale.sh 
+#### [cpuScale.sh] (https://github.com/nateober/Geektool-Scripts/blob/master/cpuScale.sh)
 Generates a stacked graph for CPU usage using mostly top and awk.
 Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; and character to use for each line. 
 	
