@@ -71,3 +71,11 @@ Generates a horizontal calendar of sorts. Although it tells you the month, date 
 	This script is best run in GeekTool with the following command and arguments:
 	". /path/to/horizontalCalender.sh"
 	
+### Other Miscellaneous and small scripts or commands. 
+Below are a number of miscellaneous scripts that I use but haven't spent a lot of time cleaning up.
+
+#### [networkThroughput.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkThroughput.sh)
+Generates text that gives you the kbps of your connection. It uses route to find your current interface and then netstat, grep and awk to format and print the text.
+
+	This script is best run in GeekTool with the following command and arguments:
+	". /path/to/horizontalCalender.sh"
