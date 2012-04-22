@@ -6,6 +6,7 @@ Written by Nate Ober
 ## About
 >GeekTool is an application for Mac OS 10.6+. 
 >It lets you display various kinds of information on your desktop...
+
 You can get GeekTool for your Mac from the [App Store](http://itunes.apple.com/us/app/geektool/id456877552?mt=12) or at the [GeekTool Project webpage] (http://projects.tynsoe.org/en/geektool/).
 
 ## Files
@@ -79,8 +80,15 @@ Generates a horizontal calendar of sorts. Although it tells you the month, date 
 ### Other Miscellaneous and small scripts or commands. 
 Below are a number of miscellaneous scripts that I use but haven't spent a lot of time cleaning up.
 
-#### [networkThroughput.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkThroughput.sh)
+####[networkThroughput.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkThroughput.sh)
 Generates text that gives you the kbps of your connection. It uses route to find your current interface and then netstat, grep and awk to format and print the text.
 
 	This script is best run in GeekTool with the following command and arguments:
-	". /path/to/horizontalCalender.sh"
+	". /path/to/networkInfo.sh"
+
+####[networkInfo.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkInfo.sh)
+Generates text that gives you the internal, external and mac address for your default interface. It uses route to find your current interface and then ifconfig and awk to format and print the text.
+
+	This script is best run in GeekTool with the following command and arguments:
+	". /path/to/networkInfo.sh"
+	
