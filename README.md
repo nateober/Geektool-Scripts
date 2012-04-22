@@ -1,6 +1,8 @@
 # GeekTool Scripts
 Written by Nate Ober
 
+<img src="http://dl.dropbox.com/u/2970815/Geektool.png" alt="Background Example" />
+
 ## About
 >GeekTool is an application for Mac OS 10.6+. 
 >It lets you display various kinds of information on your desktop...
