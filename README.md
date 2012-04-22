@@ -24,7 +24,9 @@ Options include setting a console color for highlighting utilization bars; numbe
 	
 	-l      Total number of divisor symbols. Default is 40.
 	
-	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
+	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the
+
+	string in quotes)
 
 #### [memScale.sh] (https://github.com/nateober/Geektool-Scripts/blob/master/memScale.sh)
 Generates a stacked graph for Memory usage using mostly top and awk.
@@ -38,7 +40,9 @@ Options include setting a console color for highlighting utilization bars; numbe
 	
 	-l      Total number of divisor symbols. Default is 40.
 	
-	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
+	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the
+
+	string in quotes)
 
 #### [storage.sh](https://github.com/nateober/Geektool-Scripts/blob/master/storage.sh)
 Generates a stacked graph for Hard Drive usage using mostly df and awk.
@@ -52,7 +56,9 @@ Options include setting a console color for highlighting utilization bars; numbe
 	
 	-l      Total number of divisor symbols. Default is 40.
 	
-	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
+	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the
+
+	string in quotes)
 	
 ### Other Console Color Scripts
 Below is a local temperature (as in weather) script and yet another calendar script. Brought to you in console color.
