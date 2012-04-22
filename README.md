@@ -51,3 +51,23 @@ Options include setting a console color for highlighting utilization bars; numbe
 	-l      Total number of divisor symbols. Default is 40.
 	
 	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
+	
+### Other Console Color Scripts
+Below is a local temperature (as in weather) script and yet another calendar script. Brought to you in console color.
+
+#### vertWeatherScale.sh
+Generates a vertical number line with the high and low for the day and current temperature highlighted.
+Options include the size of the number line and the zipcode (required). All information is acquired through the Yahoo weather api. (http://xml.weather.yahoo.com/forecastrss).
+Temperature is in degrees Fahrenheit.
+
+	This script is best run in GeekTool with the following command and arguments:
+	". /path/to/storage.sh [zn][arguments]"
+	-z      Zipcode. Required.
+	-n      Total numbers output. Default is 35.
+
+#### horizontalCalender.sh
+Generates a horizontal calendar of sorts. Although it tells you the month, date and day of the week, it is mostly for looks.
+
+	This script is best run in GeekTool with the following command and arguments:
+	". /path/to/storage.sh"
+	
