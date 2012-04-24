@@ -1,5 +1,6 @@
 # GeekTool Scripts
-Written by Nate Ober
+
+A collection of scripts I wrote for use with Geektool on my Macs.
 
 <img src="http://dl.dropbox.com/u/2970815/Geektool.png" alt="Background Example" />
 
