@@ -2,7 +2,7 @@
 # Created By Nate Ober
 # Nate [dot] Ober [at] Gmail
 
-TOTAL=35;
+TOTAL=20;
 ZIP=0;
 
 usage()
@@ -15,7 +15,7 @@ I wrote this for use with Geektool. Please use $0 -z [zipcode] as a minimum set 
 
 OPTIONS:
    -z      Zipcode. Required.
-   -n      Total numbers output. Default is 35.
+   -n      Total numbers output. Default is 20.
 EOF
 }
 
@@ -50,61 +50,79 @@ if [ $ZIP -eq 0 ]; then
 fi
 
 WEATHER=`curl -s http://xml.weather.yahoo.com/forecastrss?p=$ZIP`;
-CURRTEMP=`echo $WEATHER | grep -o "yweather:condition .*temp=\"[0-9]*\"" | grep -o "temp=\"[0-9]*\"" | sed -e 's/temp=\"//' -e 's/\"$//'`;
-HIGH=`echo $WEATHER | grep -o "yweather:forecast .*high=\"[0-9]*\"" | grep -o -m 1 "high=\"[0-9]*\"" | head -1 | sed -e 's/high=\"//' -e 's/\"$//'`;
-LOW=`echo $WEATHER | grep -o "yweather:forecast .*low=\"[0-9]*\"" | grep -o -m 1 "low=\"[0-9]*\"" | head -1 | sed -e 's/low=\"//' -e 's/\"$//'`;
+if [ "$WEATHER" != '' ]; then
+	CURRTEMP=`echo $WEATHER | grep -o "yweather:condition .*temp=\"[0-9]*\"" | grep -o "temp=\"[0-9]*\"" | sed -e 's/temp=\"//' -e 's/\"$//'`;
+	HIGH=`echo $WEATHER | grep -o "yweather:forecast .*high=\"[0-9]*\"" | grep -o -m 1 "high=\"[0-9]*\"" | head -1 | sed -e 's/high=\"//' -e 's/\"$//'`;
+	LOW=`echo $WEATHER | grep -o "yweather:forecast .*low=\"[0-9]*\"" | grep -o -m 1 "low=\"[0-9]*\"" | head -1 | sed -e 's/low=\"//' -e 's/\"$//'`;
 
-let SPREAD=$[$[$TOTAL]-$[$HIGH-$LOW]]/2;
-let TOP=$HIGH+$SPREAD;
-let BOTTOM=$LOW-$[$TOTAL-$SPREAD]+$[$HIGH-$LOW];
+	let SPREAD=$[$[$TOTAL]-$[$HIGH-$LOW]]/2;
+	let TOP=$HIGH+$SPREAD;
+	let BOTTOM=$LOW-$[$TOTAL-$SPREAD]+$[$HIGH-$LOW];
 
 
 
-# Set Temperature and Range Colors
-# Blue, Yellow, Red for Temperatures
-# White for High and Low (unless the current temperature is high or low)
-COLD='\033[0;36m';
-WARM='\033[0;33m';
-HOT='\033[0;31m';
-OUTSIDE='\033[0;37m';
+	# Set Temperature and Range Colors
+	# Blue, Yellow, Red for Temperatures
+	# White for High and Low (unless the current temperature is high or low)
+	COLD='\033[0;36m';
+	WARM='\033[0;33m';
+	HOT='\033[0;31m';
+	OUTSIDE='\033[0;37m';
 
-if [ $CURRTEMP -lt 50 ]; then
-	TEMP=$COLD;
-elif [ $CURRTEMP -ge 50 ] && [ $CURRTEMP -lt 75 ] ; then
-	TEMP=$WARM;
-else
-	TEMP=$HOT;
-fi
-
-if [ $CURRTEMP -gt $TOP ]; then
-	let DIFF=$CURRTEMP-$TOP;
-	let CURSOR=$CURRTEMP;
-	let END=$BOTTOM+$DIFF;
-elif [ $CURRTEMP -lt $BOTTOM ]; then
-	let DIFF=$BOTTOM-$CURRTEMP;
-	let CURSOR=$TOP-$DIFF;
-	let END=$CURRTEMP;
-else
-	CURSOR=$TOP;
-	END=$BOTTOM
-fi
-
-echo "-----"
-while [ $CURSOR -ge $END ]; do
-	if [ $CURSOR -eq $CURRTEMP ] && ([ $CURSOR -eq $HIGH ] || [ $CURSOR -eq $LOW ]); then
-		echo "$(echo $TEMP)-$CURSOR""˙$(echo  '\033[0m')";
-	elif [ $CURSOR -eq $CURRTEMP ]; then
-		echo " $(echo $TEMP)$CURSOR""˙$(echo  '\033[0m')";
-	elif [ $CURSOR -eq $HIGH ]; then
-		echo "$(echo $OUTSIDE)-""$HIGH""-$(echo  '\033[0m')";
-	elif [ $CURSOR -eq $LOW ]; then
-		echo "$(echo $OUTSIDE)-""$LOW""-$(echo  '\033[0m')";
+	if [ $CURRTEMP -lt 50 ]; then
+		TEMP=$COLD;
+	elif [ $CURRTEMP -ge 50 ] && [ $CURRTEMP -lt 75 ] ; then
+		TEMP=$WARM;
 	else
-		echo " $CURSOR";
+		TEMP=$HOT;
 	fi
-	if [ $CURSOR -ne $END ]; then
-		echo " -";
+
+	if [ $CURRTEMP -gt $TOP ]; then
+		let DIFF=$CURRTEMP-$TOP;
+		let CURSOR=$CURRTEMP;
+		let END=$BOTTOM+$DIFF;
+	elif [ $CURRTEMP -lt $BOTTOM ]; then
+		let DIFF=$BOTTOM-$CURRTEMP;
+		let CURSOR=$TOP-$DIFF;
+		let END=$CURRTEMP;
+	else
+		CURSOR=$TOP;
+		END=$BOTTOM
 	fi
-	let CURSOR=$CURSOR-1;
-done
-echo "-----"
+
+	echo "-----"
+	while [ $CURSOR -ge $END ]; do
+		if [ $CURSOR -eq $CURRTEMP ] && ([ $CURSOR -eq $HIGH ] || [ $CURSOR -eq $LOW ]); then
+			echo "$(echo $TEMP)-$CURSOR""˙$(echo  '\033[0m')";
+		elif [ $CURSOR -eq $CURRTEMP ]; then
+			echo " $(echo $TEMP)$CURSOR""˙$(echo  '\033[0m')";
+		elif [ $CURSOR -eq $HIGH ]; then
+			echo "$(echo $OUTSIDE)-""$HIGH""-$(echo  '\033[0m')";
+		elif [ $CURSOR -eq $LOW ]; then
+			echo "$(echo $OUTSIDE)-""$LOW""-$(echo  '\033[0m')";
+		else
+			echo " $CURSOR";
+		fi
+		if [ $CURSOR -ne $END ]; then
+			echo " -";
+		fi
+		let CURSOR=$CURSOR-1;
+	done
+	echo "-----"
+else
+	echo ""
+	echo "$(echo $WARM)C$(echo  '\033[0m')";
+	echo "$(echo $WARM)a$(echo  '\033[0m')";
+	echo "$(echo $WARM)n$(echo  '\033[0m')";
+	echo "$(echo $WARM)'$(echo  '\033[0m')";
+	echo "$(echo $WARM)t$(echo  '\033[0m')";
+	echo "";
+	echo "$(echo $WARM)C$(echo  '\033[0m')";
+	echo "$(echo $WARM)o$(echo  '\033[0m')";
+	echo "$(echo $WARM)n$(echo  '\033[0m')";
+	echo "$(echo $WARM)n$(echo  '\033[0m')";
+	echo "$(echo $WARM)e$(echo  '\033[0m')";
+	echo "$(echo $WARM)c$(echo  '\033[0m')";
+	echo "$(echo $WARM)t$(echo  '\033[0m')";
+	echo "";
+fi

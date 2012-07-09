@@ -26,7 +26,7 @@ OPTIONS:
    -h      Highlight color. The color of the pipe line that indicates percent full. 
 		   Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE. Default is RED.
 		   
-   -l      Total number of divisor symbols. Default is 40.
+   -l      Total number of divisor symbols. Default is 20.
    
    -s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
    
