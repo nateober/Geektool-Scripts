@@ -94,3 +94,10 @@ This script is best run in GeekTool with the following command:
 	
 	. /path/to/networkInfo.sh
 	
+####[android_phone.sh](https://github.com/nateober/Geektool-Scripts/blob/master/android_phone.sh)
+Generates text that gives you the device ID, Battery Percentage, CPU utilization and IP Address of an Android phone attached to your computer. As of this writing, the script only supports one device at a time and requires ADB to be installed and defined in the instance path. I define mine by sourcing my bash_profile which has the path defined.
+You can get [adb](http://http://developer.android.com/tools/help/adb.html) by installing the Android SDK located at: http://developer.android.com/sdk/index.html 
+This script is best run in GeekTool with the following command:
+	
+	. /path/to/networkInfo.sh
+	
