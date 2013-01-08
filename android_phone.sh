@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 # Created By Nate Ober
 # Nate [dot] Ober [at] Gmail
 
 # In order for this script to function, you need to have adb installed and in your path.
 # You can get adb in the Android SDK
 # I source my .bash_profile script to get access to adb.
-
-for device in $(adb devices | awk '/device$/ {print $1}')
+DEVICES=`adb devices | awk '/device$/ {print $1}'`
+[ "$DEVICES" != "" ] && echo "Android Devices" && echo "--------------------------"
+for device in $DEVICES
 do
 	adb -s $device shell cat /system/build.prop | awk -F "=" '/ro\.product\.model/ {print $2}'
 	echo "Serial Number: $device"
