@@ -48,6 +48,15 @@ if [ $ZIP -eq 0 ]; then
    	usage
     exit
 fi
+	
+# Set Temperature and Range Colors
+# Blue, Yellow, Red for Temperatures
+# White for High and Low (unless the current temperature is high or low)
+	
+COLD='\033[0;36m';
+WARM='\033[0;33m';
+HOT='\033[0;31m';
+OUTSIDE='\033[0;37m';
 
 WEATHER=`curl -s http://xml.weather.yahoo.com/forecastrss?p=$ZIP`;
 if [ "$WEATHER" != '' ]; then
@@ -58,16 +67,6 @@ if [ "$WEATHER" != '' ]; then
 	let SPREAD=$[$[$TOTAL]-$[$HIGH-$LOW]]/2;
 	let TOP=$HIGH+$SPREAD;
 	let BOTTOM=$LOW-$[$TOTAL-$SPREAD]+$[$HIGH-$LOW];
-
-
-
-	# Set Temperature and Range Colors
-	# Blue, Yellow, Red for Temperatures
-	# White for High and Low (unless the current temperature is high or low)
-	COLD='\033[0;36m';
-	WARM='\033[0;33m';
-	HOT='\033[0;31m';
-	OUTSIDE='\033[0;37m';
 
 	if [ $CURRTEMP -lt 50 ]; then
 		TEMP=$COLD;
@@ -110,19 +109,10 @@ if [ "$WEATHER" != '' ]; then
 	done
 	echo "-----"
 else
-	echo ""
-	echo "$(echo $WARM)C$(echo  '\033[0m')";
-	echo "$(echo $WARM)a$(echo  '\033[0m')";
-	echo "$(echo $WARM)n$(echo  '\033[0m')";
-	echo "$(echo $WARM)'$(echo  '\033[0m')";
-	echo "$(echo $WARM)t$(echo  '\033[0m')";
-	echo "";
-	echo "$(echo $WARM)C$(echo  '\033[0m')";
-	echo "$(echo $WARM)o$(echo  '\033[0m')";
-	echo "$(echo $WARM)n$(echo  '\033[0m')";
-	echo "$(echo $WARM)n$(echo  '\033[0m')";
-	echo "$(echo $WARM)e$(echo  '\033[0m')";
-	echo "$(echo $WARM)c$(echo  '\033[0m')";
-	echo "$(echo $WARM)t$(echo  '\033[0m')";
-	echo "";
+	CC=" Can't Connect ";
+	i=0;
+	while [ $i -lt ${#CC} ]; do 
+		echo $(echo "$WARM")${CC:$i:1}$(echo  '\033[0m')  
+		 i=$[$i+1];
+	done
 fi

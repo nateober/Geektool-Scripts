@@ -79,7 +79,7 @@ This script is best run in GeekTool with the following command:
 
 	. /path/to/horizontalCalender.sh
 	
-### Other Miscellaneous and small scripts or commands. 
+### Miscellaneous and small scripts or commands. 
 Below are a number of miscellaneous scripts that I use but haven't spent a lot of time cleaning up.
 
 ####[networkThroughput.sh](https://github.com/nateober/Geektool-Scripts/blob/master/networkThroughput.sh)
