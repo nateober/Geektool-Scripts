@@ -46,18 +46,23 @@ This script is best run in GeekTool with the following command and arguments:
 
 #### [storage.sh](https://github.com/nateober/Geektool-Scripts/blob/master/storage.sh)
 Generates a stacked graph for Hard Drive usage using mostly df and awk.
-Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; and character to use for each line. 
+Options include setting a console color for highlighting utilization bars; number of lines (or other characters) to be displayed - creating longer or shorter graphs; character to use for each line; mount path to report on; and alias for chart. 
 This script is best run in GeekTool with the following command and arguments:
 
 	. /path/to/storage.sh [hls][arguments]
 	
-	-h      Highlight color. The color of the divisor symbols that indicate percent full. 
-	Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE. Default is RED.
-	
+	-h      Highlight color. The color of the pipe line that indicates percent full. 
+		   Options are LBLUE, DBLUE, BLACK, GREEN, RED, YELLOW, WHITE. Default is RED.
+		   
 	-l      Total number of divisor symbols. Default is 40.
-	
-	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the
-	string in quotes)
+
+	-s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
+   
+	-m	   Mount location. The default is "/", the home directory. Remember to quote any directory that contains spaces. (Example -m "/Volumes/Time Machine Backups")
+   
+	-n	   Name of device. This is an alias used to visually identify this device. The default is "HD".
+   		   If you use multile instantiations of this script you may want to identify each device by a short
+   		   identifier. It looks best, at the moment, if you use two characters such as "HD" or "TM" (for Time Machine).
 	
 ### Other Console Color Scripts
 Below is a local temperature (as in weather) script and yet another calendar script. Brought to you in console color.
