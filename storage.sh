@@ -13,6 +13,8 @@ WHITE='\033[0;37m';
 LINES=40;
 HIGHLIGHT=RED;
 SYMBOL="__";
+MOUNT="/";
+DEVICENAME="HD"
 
 usage()
 {
@@ -30,10 +32,16 @@ OPTIONS:
    
    -s      The string to use as a divisor symbol. The default is a "__". (As you might expect, you must surround the string in quotes)
    
+   -m	   Mount location. The default is "/", the home directory. Remember to quote any directory that contains spaces. (Example -m "/Volumes/Time Machine Backups")
+   
+   -n	   Name of device. This is an alias used to visually identify this device. The default is "HD".
+   		   If you use multile instantiations of this script you may want to identify each device by a short
+   		   identifier. It looks best, at the moment, if you use two characters such as "HD" or "TM" (for Time Machine).
+   
 EOF
 }
 
-while getopts “:h:l:s:” OPTION
+while getopts “:h:l:s:m:n:” OPTION
 do
      case $OPTION in
          h)
@@ -45,6 +53,12 @@ do
     	 s)
              SYMBOL=$(printf '%s' $OPTARG)
              ;;
+         m)
+             MOUNT="$OPTARG"
+             ;;
+    	 n)
+             DEVICENAME="$OPTARG"
+             ;;
     	 ?)
              usage
              exit
@@ -55,11 +69,6 @@ do
              ;;
      esac
 done
-
-if ! [[ "$LINES" =~ ^[0-9]+$ ]] ; then
-   	usage
-    exit
-fi
 
 case $HIGHLIGHT in
 	LBLUE)
@@ -90,8 +99,8 @@ case $HIGHLIGHT in
 esac
 
 
-DIVTOT=`df -h / | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", lines-(($5/100)*lines)}'`
-echo "$(df -h / | awk 'NR==2{printf "%s",$5}')";
+DIVTOT=`df -h "$MOUNT" | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", lines-(($5/100)*lines)}'`
+echo " $(df -h "$MOUNT" | awk 'NR==2{printf "%s",$5}')";
 for ((i=1;i<$LINES;i++));do 
 	if [ $i -ge $DIVTOT ]; then
 		echo " $(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m')"; 
@@ -99,4 +108,4 @@ for ((i=1;i<$LINES;i++));do
 		echo " $SYMBOL";
 	fi
 done
-echo " hd"
+echo " $DEVICENAME"
