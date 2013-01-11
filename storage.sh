@@ -14,7 +14,7 @@ LINES=40;
 HIGHLIGHT=RED;
 SYMBOL="__";
 MOUNT="/";
-DEVICENAME="HD"
+DEVICENAME="hd"
 
 usage()
 {
@@ -34,7 +34,7 @@ OPTIONS:
    
    -m	   Mount location. The default is "/", the home directory. Remember to quote any directory that contains spaces. (Example -m "/Volumes/Time Machine Backups")
    
-   -n	   Name of device. This is an alias used to visually identify this device. The default is "HD".
+   -n	   Name of device. This is an alias used to visually identify this device. The default is "hd".
    		   If you use multile instantiations of this script you may want to identify each device by a short
    		   identifier. It looks best, at the moment, if you use two characters such as "HD" or "TM" (for Time Machine).
    
@@ -100,7 +100,7 @@ esac
 
 
 DIVTOT=`df -h "$MOUNT" | awk -v lines="$LINES" 'NR==2{printf "%.0f\n", lines-(($5/100)*lines)}'`
-echo " $(df -h "$MOUNT" | awk 'NR==2{printf "%s",$5}')";
+echo "$(df -h "$MOUNT" | awk 'NR==2{printf "%s",$5}')";
 for ((i=1;i<$LINES;i++));do 
 	if [ $i -ge $DIVTOT ]; then
 		echo " $(echo $HIGHLIGHT)$SYMBOL$(echo  '\033[0m')"; 
