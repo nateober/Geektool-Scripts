@@ -88,8 +88,12 @@ case $HIGHLIGHT in
 		exit
 		;;
 esac
+if [ `sw_vers | awk '/tVer/{print $2}' | cut -d'.' -f2` -lt 9 ]; then
+	FREEMEM=`top -l 1 | awk '/Phys/{gsub(/[a-zA-Z]/,""); printf "%.0f", ($10/($8+$10))*100}'`
+else
+	FREEMEM=`top -l 1 | awk '/Phys/{gsub(/[a-zA-Z]/,""); printf "%.0f", ($5/($2+$5))*100}'`
+fi
 
-FREEMEM=`top -l 1 | awk '/Phys/{gsub(/[a-zA-Z]/,""); printf "%.0f", ($10/($8+$10))*100}'`
 MEMUSAGE=`echo $FREEMEM | awk '{printf "%.0f", 100 - $1}'`;
 DIVTOT=`echo $FREEMEM | awk -v lines=$LINES '{printf "%.0f", ($1/100)*lines}'`
 echo "$MEMUSAGE%";
